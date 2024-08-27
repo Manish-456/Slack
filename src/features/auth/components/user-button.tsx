@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -6,8 +8,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Loader, LogOut } from "lucide-react";
-import { useCurrentUser } from "../hooks/use-current-user";
+
 import { useAuthActions } from "@convex-dev/auth/react";
+import { useCurrentUser } from "../api/use-current-user";
 
 export function UserButton() {
   const { signOut } = useAuthActions();
@@ -19,7 +22,7 @@ export function UserButton() {
 
   if (!data) return null;
 
-  const { image, name, email } = data;
+  const { image, name } = data;
   const avatarFallback = name!.charAt(0).toUpperCase();
   return (
     <DropdownMenu modal={false}>
