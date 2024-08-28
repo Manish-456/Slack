@@ -32,7 +32,7 @@ export function CreateWorkspaceModal() {
       },
       {
         onSuccess(id) {
-          router.push(`/workspaces/${id}`);
+          router.push(`/workspace/${id}`);
           toast.success("Workspace created");
           handleClose();
         },
