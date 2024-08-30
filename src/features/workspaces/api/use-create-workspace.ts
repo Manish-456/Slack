@@ -43,7 +43,6 @@ export const useCreateWorkspace = () => {
              setStatus("error");
             options?.onError?.(error as Error)
             setError(error as Error)
-            setStatus("error");
             if(options?.throwError){
                 throw error;
             }

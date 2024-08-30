@@ -1,0 +1,63 @@
+import Link from "next/link";
+import { cva, VariantProps } from "class-variance-authority";
+import { Id } from "../../../../convex/_generated/dataModel";
+import { cn } from "@/lib/utils";
+
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { FaUserLock } from "react-icons/fa";
+
+const userItemVariant = cva(
+  "flex items-center gap-1.5 justify-start font-normal h-7 px-4 text-sm overflow-hidden",
+  {
+    variants: {
+      variant: {
+        default: "text-[#f9edffcc]",
+        active: "text-[#481349] bg-white hover:bg-white/90",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+interface UserItemProps {
+  id: Id<"members">;
+  label?: string;
+  image?: string;
+  variant?: VariantProps<typeof userItemVariant>["variant"];
+  role: "admin" | "member";
+}
+
+export function UserItem({
+  id,
+  label = "Member",
+  image,
+  variant,
+  role,
+}: UserItemProps) {
+  const avatarFallback = label.charAt(0).toUpperCase();
+  const workspaceId = useWorkspaceId();
+  return (
+    <Button
+      variant={"transparent"}
+      className={cn(userItemVariant({ variant: variant }))}
+      size={"sm"}
+      asChild
+    >
+      <Link href={`/workspace/${workspaceId}/member/${id}`}>
+        <Avatar className="size-5 rounded-md mr-1">
+          <AvatarImage className="rounded-md" src={image} alt={label} />
+          <AvatarFallback className="rounded-md text-xs bg-sky-500 text-white">
+            {avatarFallback}
+          </AvatarFallback>
+        </Avatar>
+        <span className="text-sm truncate">{label}</span>
+
+        {role === "admin" && <FaUserLock className="ml-auto shrink-0" />}
+      </Link>
+    </Button>
+  );
+}
