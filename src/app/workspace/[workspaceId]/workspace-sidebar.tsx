@@ -17,9 +17,11 @@ import { WorkspaceSection } from "./workspace-section";
 import { useGetMembers } from "@/features/members/api/use-get-members";
 import { UserItem } from "./user-item";
 import { useCreateChannelModal } from "@/features/channels/store/use-create-channel-modal";
+import { useChannelId } from "@/hooks/use-channel-id";
 
 export function WorkspaceSidebar() {
   const workspaceId = useWorkspaceId();
+  const channelId = useChannelId();
   const { data: member, isLoading: memberLoading } = useCurrentMember({
     workspaceId,
   });
@@ -59,12 +61,7 @@ export function WorkspaceSidebar() {
           workspace={workspace}
           isAdmin={member.role === "admin"}
         />
-        <SidebarItem
-          label="Threads"
-          icon={MessageSquareText}
-          id={"threads"}
-          variant={"active"}
-        />
+        <SidebarItem label="Threads" icon={MessageSquareText} id={"threads"} />
         <SidebarItem label="Drafts & Sent" icon={SendHorizonal} id={"drafts"} />
       </div>
       <WorkspaceSection
@@ -78,6 +75,7 @@ export function WorkspaceSidebar() {
             label={item.name}
             icon={HashIcon}
             id={item._id}
+            variant={channelId === item._id ? "active" : "default"}
           />
         ))}
       </WorkspaceSection>
