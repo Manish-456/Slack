@@ -52,6 +52,7 @@ export const remove = mutation({
 
     //TODO!:  Remove associated messages 
 
+
      await ctx.db.delete(args.id);
 
      return args.id
