@@ -48,11 +48,9 @@ export function UserItem({
       asChild
     >
       <Link href={`/workspace/${workspaceId}/member/${id}`}>
-        <Avatar className="size-5 rounded-md mr-1">
-          <AvatarImage className="rounded-md" src={image} alt={label} />
-          <AvatarFallback className="rounded-md text-xs bg-sky-500 text-white">
-            {avatarFallback}
-          </AvatarFallback>
+        <Avatar className="size-5 mr-1">
+          <AvatarImage src={image} alt={label} />
+          <AvatarFallback>{avatarFallback}</AvatarFallback>
         </Avatar>
         <span className="text-sm truncate">{label}</span>
 
