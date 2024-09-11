@@ -1,4 +1,4 @@
-import { format, isToday, isYesterday, differenceInMinutes } from "date-fns";
+import { format, differenceInMinutes } from "date-fns";
 import { GetMessagesReturnType } from "@/features/messages/api/use-get-messages";
 import { Message } from "./message";
 import { ChannelHero } from "./channel-hero";
@@ -7,13 +7,15 @@ import { Id } from "../../convex/_generated/dataModel";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { Loader } from "lucide-react";
+import { formatDateLabel } from "@/lib/utils";
+import { ConversationHero } from "./conversation-hero";
 
 const TIME_THRESHOLD = 5;
 
 interface MessageListProps {
   memberName?: string;
   memberImage?: string;
-  channelName: string;
+  channelName?: string;
   channelCreationTime?: number;
   data: GetMessagesReturnType | undefined;
   variant?: "channel" | "thread" | "conversation";
@@ -21,15 +23,6 @@ interface MessageListProps {
   loadMore: () => void;
   canLoadMore: boolean;
 }
-
-const formatDateLabel = (dateStr: string) => {
-  const date = new Date(dateStr);
-  if (isToday(date)) return "Today";
-
-  if (isYesterday(date)) return "Yesterday";
-
-  return format(date, "EEEE, MMMM d");
-};
 
 export default function MessageList({
   memberImage,
@@ -135,6 +128,9 @@ export default function MessageList({
       )}
       {variant === "channel" && channelName && channelCreationTime && (
         <ChannelHero name={channelName} creationTime={channelCreationTime} />
+      )}
+      {variant === "conversation" && memberName && (
+        <ConversationHero name={memberName} image={memberImage} />
       )}
     </div>
   );
