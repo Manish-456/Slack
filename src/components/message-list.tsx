@@ -87,6 +87,7 @@ export default function MessageList({
                 image={message.image}
                 createdAt={message._creationTime}
                 updatedAt={message.updatedAt}
+                threadImage={message.threadImage}
                 threadCount={message.threadCount}
                 threadTimestamp={message.threadTimestamp}
                 isEditing={editingId === message._id}
@@ -94,6 +95,7 @@ export default function MessageList({
                 isCompact={isCompact}
                 hideThreadButton={variant === "thread"}
                 isAuthor={message.memberId === currentMember?._id}
+                threadName={message.threadName}
               />
             );
           })}

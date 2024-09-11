@@ -200,6 +200,7 @@ export function Thread({ messageId, onClose }: ThreadProps) {
                   threadTimestamp={message.threadTimestamp}
                   isEditing={editingId === message._id}
                   setEditingId={setEditingId}
+                  threadName={message.threadName}
                   isCompact={isCompact}
                   hideThreadButton
                   isAuthor={message.memberId === currentMember?._id}
