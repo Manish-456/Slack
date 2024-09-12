@@ -182,24 +182,10 @@ export function Profile({ memberId, onClose }: ProfileProps) {
           <p className="text-xl font-bold">{member.user.name}</p>
           {currentMember?.role === "admin" && currentMember._id !== memberId ? (
             <div className="flex items-center gap-2 mt-4">
-              <Button variant={"outline"} className="w-full capitalize">
-                {member.role} <ChevronDownIcon className="size-4 ml-2" />
-              </Button>
-              <Button variant={"outline"} onClick={onRemove} className="w-full">
-                Remove
-              </Button>
-            </div>
-          ) : currentMember?._id === memberId &&
-            currentMember.role !== "admin" ? (
-            <div className="mt-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant={"outline"}
-                    onClick={onLeave}
-                    className="w-full"
-                  >
-                    Leave
+                  <Button variant={"outline"} className="w-full capitalize">
+                    {member.role} <ChevronDownIcon className="size-4 ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-full">
@@ -218,6 +204,16 @@ export function Profile({ memberId, onClose }: ProfileProps) {
                   </DropdownMenuRadioGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
+              <Button variant={"outline"} onClick={onRemove} className="w-full">
+                Remove
+              </Button>
+            </div>
+          ) : currentMember?._id === memberId &&
+            currentMember.role !== "admin" ? (
+            <div className="mt-4">
+              <Button variant={"outline"} onClick={onLeave} className="w-full">
+                Leave
+              </Button>
             </div>
           ) : null}
         </div>
