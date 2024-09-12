@@ -68,7 +68,7 @@ export function Message({
   setEditingId,
   threadName,
 }: MessageProps) {
-  const { parentMessageId, onOpenMessage, onClose } = usePanel();
+  const { parentMessageId, onOpenMessage, onClose, onOpenProfile } = usePanel();
   const [ConfirmDialog, confirm] = useConfirm(
     "Delete message",
     "Are you sure you want to delete this message? This cannot be undone."
@@ -82,6 +82,8 @@ export function Message({
 
   const { mutate: toggleReaction, isPending: isTogglingReaction } =
     useToggleReaction();
+
+  const isPending = isUpdatingMessage || isTogglingReaction;
 
   const handleEdit = ({ body }: { body: string }) => {
     updateMessage(
@@ -147,7 +149,7 @@ export function Message({
               <div className="w-full h-full">
                 <Editor
                   onSubmit={handleEdit}
-                  disabled={isUpdatingMessage}
+                  disabled={isPending}
                   defaultValue={JSON.parse(body)}
                   onCancel={() => setEditingId(null)}
                   variant="update"
@@ -175,7 +177,7 @@ export function Message({
           {!isEditing && (
             <Toolbar
               isAuthor={isAuthor}
-              isPending={isUpdatingMessage}
+              isPending={isPending}
               handleEdit={() => setEditingId(id)}
               handleThread={() => onOpenMessage(id)}
               handleDelete={handleRemove}
@@ -201,7 +203,7 @@ export function Message({
         )}
       >
         <div className="flex items-start gap-2">
-          <button className="">
+          <button onClick={() => onOpenProfile(memberId)}>
             <Avatar>
               <AvatarImage src={authorImage} alt={authorName} />
               <AvatarFallback>{avatarFallback}</AvatarFallback>
@@ -211,7 +213,7 @@ export function Message({
             <div className="w-full h-full">
               <Editor
                 onSubmit={handleEdit}
-                disabled={isUpdatingMessage}
+                disabled={isPending}
                 defaultValue={JSON.parse(body)}
                 onCancel={() => setEditingId(null)}
                 variant="update"
@@ -222,7 +224,7 @@ export function Message({
               <div className="text-sm">
                 <button
                   className="font-bold text-primary hover:underline"
-                  onClick={() => {}}
+                  onClick={() => onOpenProfile(memberId)}
                 >
                   {authorName}
                 </button>
@@ -252,7 +254,7 @@ export function Message({
         {!isEditing && (
           <Toolbar
             isAuthor={isAuthor}
-            isPending={isUpdatingMessage}
+            isPending={isPending}
             handleEdit={() => setEditingId(id)}
             handleThread={() => onOpenMessage(id)}
             handleDelete={handleRemove}
