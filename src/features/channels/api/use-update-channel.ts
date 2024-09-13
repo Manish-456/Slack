@@ -6,7 +6,8 @@ import { api } from "../../../../convex/_generated/api";
 
 type RequestType = {
     id: Id<"channels">;
-    name: string;
+    name?: string;
+    description?: string;
 }
 
 type Options = {

@@ -3,7 +3,9 @@ import { mutation, query } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 
 export const update = mutation({
-    args: { name: v.string(), id: v.id("channels") },
+    args: { name: v.optional(v.string()), 
+        id: v.id("channels"),
+         description: v.optional(v.string()) },
     handler: async (ctx, args) => {
     const userId = await getAuthUserId(ctx);
 
@@ -22,9 +24,20 @@ export const update = mutation({
         throw new Error("Unauthorized");
      }
 
-     await ctx.db.patch(args.id, {
-        name: args.name
-     });
+     const value: {
+        name?: string;
+        description?: string;
+     } = {}
+
+     if(args.name) {
+        value.name = args.name
+     }
+
+     if(args.description){
+        value.description = args.description
+     }
+
+     await ctx.db.patch(args.id, value);
 
      return args.id
     

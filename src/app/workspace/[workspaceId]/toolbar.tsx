@@ -56,7 +56,7 @@ export function Toolbar() {
       <div className="min-w-[280px] grow-[2] shrink max-w-[642px]">
         <Button
           onClick={() => setOpen(true)}
-          className="bg-accent/25 hover:bg-accent-25 w-full justify-start h-7 px-2"
+          className="bg-[#8d239154] w-full justify-start h-7 px-2 hover:bg-[#8d239138]"
         >
           <Search className="size-4 text-white mr-2" />
           <span className="text-white text-sm">Search {data?.name}</span>

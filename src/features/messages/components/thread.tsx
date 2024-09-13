@@ -19,7 +19,7 @@ import { useGetMessages } from "../api/use-get-messages";
 import { useCreateMessage } from "../api/use-create-message";
 
 import { Id } from "../../../../convex/_generated/dataModel";
-import { formatDateLabel } from "@/lib/utils";
+import { cn, formatDateLabel } from "@/lib/utils";
 
 const Editor = dynamic(() => import("@/components/editor"), {
   ssr: false,
@@ -160,7 +160,12 @@ export function Thread({ messageId, onClose }: ThreadProps) {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex justify-between items-center px-4 h-[49px] border-b">
+      <div
+        className={cn(
+          "flex justify-between items-center h-[49px] px-4 border-b",
+          channelId && "h-[70px]"
+        )}
+      >
         <p className="text-lg font-bold">Thread</p>
         <Button variant={"ghost"} size={"iconSm"} onClick={onClose}>
           <XIcon className="size-5 stroke-[1.5]" />
@@ -171,7 +176,7 @@ export function Thread({ messageId, onClose }: ThreadProps) {
           <div key={dateKey}>
             <div className="text-center my-2 relative">
               <hr className="absolute top-1/2 left-0 right-0 border-t border-gray-300" />
-              <span className="relative inline-block bg-white px-4 py-1 rounded-full text-xs border border-gray-300 shadow-sm">
+              <span className="relative inline-block bg-background px-4 py-1 rounded-full text-xs border border-gray-300 shadow-sm">
                 {formatDateLabel(dateKey)}
               </span>
             </div>

@@ -26,6 +26,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import { useChannelId } from "@/hooks/use-channel-id";
 
 interface ProfileProps {
   memberId: Id<"members">;
@@ -34,6 +36,7 @@ interface ProfileProps {
 
 export function Profile({ memberId, onClose }: ProfileProps) {
   const router = useRouter();
+  const channelId = useChannelId();
   const workspaceId = useWorkspaceId();
   const [LeaveDialog, confirmLeave] = useConfirm(
     "Leave workspace",
@@ -164,7 +167,12 @@ export function Profile({ memberId, onClose }: ProfileProps) {
       <UpdateDialog />
       <LeaveDialog />
       <div className="h-full flex flex-col">
-        <div className="flex justify-between items-center px-4 h-[49px] border-b">
+        <div
+          className={cn(
+            "flex justify-between items-center h-[49px] px-4 border-b",
+            channelId && "h-[70px]"
+          )}
+        >
           <p className="text-lg font-bold">Profile</p>
           <Button variant={"ghost"} size={"iconSm"} onClick={onClose}>
             <XIcon className="size-5 stroke-[1.5]" />

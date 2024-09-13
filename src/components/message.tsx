@@ -133,8 +133,8 @@ export function Message({
         <ConfirmDialog />
         <div
           className={cn(
-            "flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative",
-            isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]",
+            "flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-900 cursor-pointer  group relative",
+            isEditing && "bg-[#1a1a1a33] hover:bg-[#1a1a1a33]",
             isRemovingMessage &&
               "bg-rose-500/50 transform transition-all scale-y-0 origin-bottom duration-200"
           )}
@@ -196,8 +196,8 @@ export function Message({
       <ConfirmDialog />
       <div
         className={cn(
-          "flex flex-col gap-2 p-1.5 px-5 hover:bg-gray-100/60 group relative",
-          isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]",
+          "flex flex-col cursor-pointer gap-2 p-1.5 px-5 hover:bg-gray-900 group relative",
+          isEditing && "bg-[#29181833] hover:bg-[#1a1a1a33]",
           isRemovingMessage &&
             "bg-rose-500/50 transform transition-all scale-y-0 origin-bottom duration-200"
         )}

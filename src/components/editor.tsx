@@ -173,7 +173,7 @@ export default function Editor({
       />
       <div
         className={cn(
-          "flex flex-col border border-slate-200 rounded-md overflow-hidden focus-within:border-slate-300 focus-within:shadow-sm transition bg-white",
+          "flex flex-col border focus-within:border-2  focus-within:border-purple-800 rounded-md overflow-hidden  focus-within:shadow-lg transition-shadow",
           disabled && "opacity-50"
         )}
       >
@@ -220,7 +220,7 @@ export default function Editor({
             </Button>
           </EmojiPopover>
           {variant === "update" && (
-            <div className="ml-auto flex items-center gap-x-2">
+            <div className="ml-auto bg-background flex items-center gap-x-2">
               <Button
                 variant={"outline"}
                 size={"sm"}

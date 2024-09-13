@@ -36,6 +36,8 @@ export function CreateChannelModal() {
   const handleCreate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!name) return;
+
     createChannel(
       {
         name,

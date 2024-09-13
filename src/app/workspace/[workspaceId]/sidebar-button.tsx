@@ -20,12 +20,12 @@ export function SidebarButton({
         variant={"transparent"}
         className={cn(
           "size-9 p-2 group-hover:bg-accent/20",
-          isActive && "bg-accent/20"
+          isActive && "bg-[#8d2391]"
         )}
       >
         <Icon className="size-5 text-white group-hover:scale-110 transition-all" />
       </Button>
-      <span className="text-[11px] text-white group-hover:text-accent">
+      <span className="text-[11px] text-white group-hover:text-white/80">
         {label}
       </span>
     </div>

@@ -22,6 +22,7 @@ interface MessageListProps {
   isLoadingMore: boolean;
   loadMore: () => void;
   canLoadMore: boolean;
+  channelDescription?: string;
 }
 
 export default function MessageList({
@@ -33,6 +34,7 @@ export default function MessageList({
   variant = "channel",
   isLoadingMore,
   loadMore,
+  channelDescription,
   canLoadMore,
 }: MessageListProps) {
   const [editingId, setEditingId] = useState<Id<"messages"> | null>(null);
@@ -61,8 +63,8 @@ export default function MessageList({
       {Object.entries(groupedMessages || {}).map(([dateKey, messages]) => (
         <div key={dateKey}>
           <div className="text-center my-2 relative">
-            <hr className="absolute top-1/2 left-0 right-0 border-t border-gray-300" />
-            <span className="relative inline-block bg-white px-4 py-1 rounded-full text-xs border border-gray-300 shadow-sm">
+            <hr className="absolute top-1/2 left-0 right-0 z-[2] border-t border-gray-300" />
+            <span className="relative inline-block z-[5] bg-background px-4 py-1 rounded-full text-xs border border-gray-300 shadow-sm">
               {formatDateLabel(dateKey)}
             </span>
           </div>
@@ -123,13 +125,17 @@ export default function MessageList({
       {isLoadingMore && (
         <div className="text-center my-2 relative">
           <hr className="absolute top-1/2 left-0 right-0 border-t border-gray-300" />
-          <span className="relative inline-block bg-white px-4 py-1 rounded-full text-xs border border-gray-300 shadow-sm">
+          <span className="relative inline-block  px-4 py-1 rounded-full text-xs border border-gray-300 shadow-sm">
             <Loader className="size-4 animate-spin" />
           </span>
         </div>
       )}
       {variant === "channel" && channelName && channelCreationTime && (
-        <ChannelHero name={channelName} creationTime={channelCreationTime} />
+        <ChannelHero
+          name={channelName}
+          creationTime={channelCreationTime}
+          channelDescription={channelDescription}
+        />
       )}
       {variant === "conversation" && memberName && (
         <ConversationHero name={memberName} image={memberImage} />

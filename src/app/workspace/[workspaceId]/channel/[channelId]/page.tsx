@@ -39,6 +39,7 @@ export default function ChannelIdPage() {
         channelName={channel.name}
         channelCreationTime={channel._creationTime}
         data={results}
+        channelDescription={channel.description}
         isLoadingMore={status === "LoadingMore"}
         canLoadMore={status === "CanLoadMore"}
         loadMore={loadMore}
