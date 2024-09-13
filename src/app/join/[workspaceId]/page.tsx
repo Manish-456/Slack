@@ -58,7 +58,7 @@ export default function JoinPage() {
   }
 
   return (
-    <div className="h-full flex flex-col gap-y-8 items-center justify-center bg-white p-8 shadow-md">
+    <div className="h-full flex flex-col gap-y-8 items-center justify-center p-8 shadow-md">
       <Image
         src={"/logo.svg"}
         alt="logo"
